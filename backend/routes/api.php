@@ -33,7 +33,9 @@ Route::prefix('v0')->group(function () {
                 Route::post('/updateCourse/{id?}', [AdminController::class, 'updateCourse'])->name('update-course');
                 Route::post('/deleteCourse/{id?}', [AdminController::class, 'deleteCourse'])->name('delete-course');
                 Route::get('/getCourseByCode/{code?}', [AdminController::class, 'getCourseByCode'])->name('get-course-by-code');
-            //});
+                Route::get('/getCourse/{id?}', [AdminController::class, 'getCourse'])->name('get-course');
+                //});
+
         });
 
        // Route::prefix('instructor')->group(function () {

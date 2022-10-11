@@ -183,10 +183,18 @@ class AdminController extends Controller{
     }
 
     public function getCourseByCode($code){
-        $user = Course::where('code', $code)->get(); ;
+        $course = Course::where('code', $code)->get(); ;
         return response()->json([
             "status" => "Success",
-            "data" => $user
+            "data" => $course
+        ]);
+    }
+
+    public function getCourse($id){
+        $course = Course::where('_id', $id)->get(); ;
+        return response()->json([
+            "status" => "Success",
+            "data" => $course
         ]);
     }
 }
