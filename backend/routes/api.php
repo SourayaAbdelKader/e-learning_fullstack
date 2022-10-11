@@ -22,7 +22,9 @@ Route::prefix('v0')->group(function () {
                 Route::get('/restricted', [AdminController::class, 'restricted'])->name('restricted');
                 Route::get('/getInstructors', [AdminController::class, 'getInstructors'])->name('get-instructors');
                 Route::get('/getStudents', [AdminController::class, 'getStudents'])->name('get-students');
+                Route::post('/updateUser/{id?}', [AdminController::class, 'updateUser'])->name('update-User');
 
+                
                 
             //});
         });
