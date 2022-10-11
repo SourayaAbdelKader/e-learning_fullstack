@@ -19,16 +19,18 @@ Route::prefix('v0')->group(function () {
 
         Route::prefix('admin')->group(function () {
             //Route::group(["middleware" => "role"], function(){
+                // related to users
                 Route::get('/restricted', [AdminController::class, 'restricted'])->name('restricted');
                 Route::get('/getInstructors', [AdminController::class, 'getInstructors'])->name('get-instructors');
                 Route::get('/getStudents', [AdminController::class, 'getStudents'])->name('get-students');
                 Route::post('/updateUser/{id?}', [AdminController::class, 'updateUser'])->name('update-user');
                 Route::get('/getUserInfo/{id?}', [AdminController::class, 'getUserInfo'])->name('get-user-info');
                 Route::post('/addUser', [AdminController::class, 'addUser'])->name('add-User');
-                Route::post('/addCourse', [AdminController::class, 'addCourse'])->name('add-course');
                 Route::post('/deleteUser/{id?}', [AdminController::class, 'deleteUser'])->name('delete-user');
-
-                
+                //related to courses
+                Route::post('/addCourse', [AdminController::class, 'addCourse'])->name('add-course');
+                Route::post('/updateCourse/{id?}', [AdminController::class, 'updateCourse'])->name('update-course');
+                Route::post('/deleteCourse/{id?}', [AdminController::class, 'deleteCourse'])->name('delete-course');
                 
             //});
         });

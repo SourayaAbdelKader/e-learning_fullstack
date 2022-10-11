@@ -70,6 +70,14 @@ class AdminController extends Controller{
         ]);
     }
 
+    public function getUserInfoByEmail($email){
+        $user = User::where('email', $email)->get(); ;
+        return response()->json([
+            "status" => "Success",
+            "data" => $user
+        ]);
+    }
+
     public function addUser(Request $request){
 
         $user = new User;
@@ -172,5 +180,13 @@ class AdminController extends Controller{
         return response()->json([
             'status' => 'failed'
         ], 401);
+    }
+
+    public function getCourseByCode($code){
+        $user = Course::where('code', $code)->get(); ;
+        return response()->json([
+            "status" => "Success",
+            "data" => $user
+        ]);
     }
 }
