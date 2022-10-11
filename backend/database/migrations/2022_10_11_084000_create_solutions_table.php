@@ -12,6 +12,7 @@ return new class extends Migration{
             $collection->foreign('student_id')->references('id')->on('users');
             $collection->foreign('assignment_id')->references('id')->on('assignments');
             $collection->string('picture_url')->nullable();
+            $collection->text('description');
             $collection->timestamps();
         });
     }

@@ -12,7 +12,6 @@ use App\Models\Course-student;
 
 class InstructorController extends Controller
 {
-    // the first three also exsist in the admin controller
     public function getInstructorByEmail($email){
         //$user = Auth::user();
         $user = User::where('email', $email)->get(); ;
