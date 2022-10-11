@@ -27,11 +27,12 @@ Route::prefix('v0')->group(function () {
                 Route::get('/getUserInfo/{id?}', [AdminController::class, 'getUserInfo'])->name('get-user-info');
                 Route::post('/addUser', [AdminController::class, 'addUser'])->name('add-User');
                 Route::post('/deleteUser/{id?}', [AdminController::class, 'deleteUser'])->name('delete-user');
+                Route::get('/getUserInfoByEmail/{email?}', [AdminController::class, 'getUserInfoByEmail'])->name('get-user-info-by-email');
                 //related to courses
                 Route::post('/addCourse', [AdminController::class, 'addCourse'])->name('add-course');
                 Route::post('/updateCourse/{id?}', [AdminController::class, 'updateCourse'])->name('update-course');
                 Route::post('/deleteCourse/{id?}', [AdminController::class, 'deleteCourse'])->name('delete-course');
-                
+                Route::get('/getCourseByCode/{code?}', [AdminController::class, 'getCourseByCode'])->name('get-course-by-code');
             //});
         });
 
