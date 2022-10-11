@@ -23,8 +23,9 @@ Route::prefix('v0')->group(function () {
                 Route::get('/getInstructors', [AdminController::class, 'getInstructors'])->name('get-instructors');
                 Route::get('/getStudents', [AdminController::class, 'getStudents'])->name('get-students');
                 Route::post('/updateUser/{id?}', [AdminController::class, 'updateUser'])->name('update-User');
+                Route::get('/getUserInfo/{id?}', [AdminController::class, 'getUserInfo'])->name('get-user-info');
+                Route::post('/addUser', [AdminController::class, 'addUser'])->name('add-User');
 
-                
                 
             //});
         });
