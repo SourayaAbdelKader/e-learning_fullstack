@@ -5,15 +5,18 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration{
-
+    
     public function up(){
-        Schema::create('courses_students', function ($collection) {
+        Schema::create('solutions', function ($collection) {
+            $collection->id();
             $collection->foreign('student_id')->references('id')->on('users');
-            $collection->foreign('course_id')->references('id')->on('courses');
+            $collection->foreign('assignment_id')->references('id')->on('assignments');
+            $collection->string('picture_url')->nullable();
+            $collection->timestamps();
         });
     }
 
     public function down(){
-        Schema::dropIfExists('courses_students');
+        Schema::dropIfExists('solutions');
     }
 };
