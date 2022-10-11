@@ -59,7 +59,17 @@ Route::prefix('v0')->group(function () {
        });
         
         Route::prefix('student')->group(function () {
+            Route::get('/getUserInfo/{id?}', [StudentController::class, 'getUserInfo'])->name('get-user');
+            Route::get('/getUserByEmail/{email?}', [StudentController::class, 'getUserByEmail'])->name('get-user-by-email');
+            Route::get('/getStudentCourses', [StudentController::class, 'getStudentCourses'])->name('get-student-courses');
+            Route::get('/getCourseByCode/{code?}', [StudentController::class, 'getCourseByCode'])->name('get-course-by-code');
+            Route::get('/getCourse/{id?}', [StudentController::class, 'getCourse'])->name('get-course');
+            Route::post('/enrollStudent', [StudentController::class, 'enrollStudent'])->name('enroll-student');
+            Route::post('/removeStudent/{id?}', [StudentController::class, 'removeStudent'])->name('remove-student');
             
+            Route::post('/addSolution', [StudentController::class, 'addSolution'])->name('add-solution');
+            Route::post('/updateSolution/{id?}', [StudentController::class, 'updateSolution'])->name('update-solution');
+            Route::post('/deleteSolution/{id?}', [StudentController::class, 'deleteSolution'])->name('delete-solution');
         });
     });
 

@@ -12,7 +12,7 @@ use App\Models\Course-student;
 class StudentController extends Controller
 {
     public function getUserInfo($id){ //student or his instructor
-        //$id= Auth::$id();
+        $id= Auth::$id();
         $user = User::where('_id', $id)->get(); ;
         return response()->json([
             "status" => "Success",
@@ -21,7 +21,7 @@ class StudentController extends Controller
     }
 
     public function getUserByEmail($email){
-        //$user = Auth::user();
+        $user = Auth::user();
         $user = User::where('email', $email)->get(); ;
         return response()->json([
             "status" => "Success",
@@ -129,7 +129,6 @@ class StudentController extends Controller
     }
 
     function deleteSolution($id) {
-        //$user = Auth::user();
         $delete = Solution::where('_id', $id)->delete();
         if ($delete) {
             return response()->json([
