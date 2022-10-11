@@ -33,4 +33,27 @@ class AdminController extends Controller{
             'result' => $students
         ]);
     }
+
+    public function updateUser(Request $request, $id){
+        //$id= Auth::$id();
+        $user = User::find($id);
+        //$user = Auth::user();
+        
+        $user->full_name = $request->full_name ? $request->full_name : $user->full_name;
+        $user->email = $request->email? $request->email : $user->email;
+        $user->bio = $request->bio? $request->bio : $user->bio;
+        $user->pic_url  = $request->pic_url ? $request->pic_url  : $user->pic_url ;
+
+        if($user->save()){
+            return response()->json([
+                "status" => "Success",
+                "data" => $user
+            ]);
+        }
+
+        return response()->json([
+            "status" => "Error",
+            "data" => "Error updating a model"
+        ]);
+    }
 }

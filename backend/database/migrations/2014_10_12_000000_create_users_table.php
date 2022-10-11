@@ -16,6 +16,9 @@ return new class extends Migration{
             $collection->enum('user_type', ['admin', 'instructor', 'student']);
             $collection->enum('graduated', ['yes', 'no'])->default('no');
             $collection->string('picture_url')->nullable();
+            $collection->date('birth_date');
+            $collection->string('gender', 50);
+            $collection->string('location', 100)->nullable();
             $collection->rememberToken();
             $collection->timestamps();
         });
