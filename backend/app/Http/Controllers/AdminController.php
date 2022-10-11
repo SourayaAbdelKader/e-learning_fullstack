@@ -61,7 +61,7 @@ class AdminController extends Controller{
         ]);
     }
 
-    public function getUserInfo(Request $request, $id){
+    public function getUserInfo($id){
         //$id= Auth::$id();
         $user = User::where('_id', $id)->get(); ;
         return response()->json([
@@ -96,5 +96,81 @@ class AdminController extends Controller{
             "status" => "Error",
             "data" => "Error updating a model"
         ]);
+    }
+
+    function deleteUser($id) {
+        //$user = Auth::user();
+        $delete = User::where('_id', $id)->delete();
+        if ($delete) {
+            return response()->json([
+                'status' => 'success'
+            ]);
+        }
+        return response()->json([
+            'status' => 'failed'
+        ], 401);
+    }
+
+    public function addCourse(Request $request){
+
+        $course = new Course;
+        
+        $course->name = $request->name ? $request->name : $course->name;
+        $course->code = $request->code? $request->code : $course->code;
+        $course->credits = $request->credits? $request->credits : $course->credits;
+        $course->hours = $request->hours? $request->hours : $course->hours;
+        $course->begin_at = $request->begin_at ? $request->begin_at  : $course->begin_at ;
+        $course->end_at = $request->end_at ? $request->end_at  : $course->end_at;
+        $course->instructor_id = $request->instructor_id ? $request->instructor_id : $course->instructor_id;
+        
+        if($course->save()){
+            return response()->json([
+                "status" => "Success",
+                "data" => $course
+            ]);
+        }
+
+        return response()->json([
+            "status" => "Error",
+            "data" => "Error updating a model"
+        ]);
+    }
+
+    public function updateCourse(Request $request, $id){
+
+        $course = Course::find($id);
+        
+        $course->name = $request->name ? $request->name : $course->name;
+        $course->code = $request->code? $request->code : $course->code;
+        $course->credits = $request->credits? $request->credits : $course->credits;
+        $course->hours = $request->hours? $request->hours : $course->hours;
+        $course->begin_at = $request->begin_at ? $request->begin_at  : $course->begin_at ;
+        $course->end_at = $request->end_at ? $request->end_at  : $course->end_at;
+        $course->instructor_id = $request->instructor_id ? $request->instructor_id : $course->instructor_id;
+        
+        if($course->save()){
+            return response()->json([
+                "status" => "Success",
+                "data" => $course
+            ]);
+        }
+
+        return response()->json([
+            "status" => "Error",
+            "data" => "Error updating a model"
+        ]);
+    }
+
+    function deleteCourse($id) {
+        //$user = Auth::user();
+        $delete = Course::where('_id', $id)->delete();
+        if ($delete) {
+            return response()->json([
+                'status' => 'success'
+            ]);
+        }
+        return response()->json([
+            'status' => 'failed'
+        ], 401);
     }
 }
