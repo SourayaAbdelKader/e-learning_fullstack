@@ -64,7 +64,7 @@ class InstructorController extends Controller
         if($enroll->save()){
             return response()->json([
                 "status" => "Success",
-                "data" => $course
+                "data" => $enroll
             ]);
         }
     }
@@ -91,7 +91,7 @@ class InstructorController extends Controller
         if($annoucememnt->save()){
             return response()->json([
                 "status" => "Success",
-                "data" => $course
+                "data" => $annoucememnt
             ]);
         }
 
@@ -109,7 +109,7 @@ class InstructorController extends Controller
         if($annoucememnt->save()){
             return response()->json([
                 "status" => "Success",
-                "data" => $course
+                "data" => $annoucememnt
             ]);
         }
 
@@ -145,6 +145,79 @@ class InstructorController extends Controller
         return response()->json([
             "status" => "Success",
             "data" => $annoucememnt
+        ]);
+    }
+
+    
+    // for the assignments
+    public function addAssignment(Request $request){
+
+        $assignment = new Assignment;
+        
+        $assignment->course_id = $request->course_id ? $request->course_id : $assignment->course_id;
+        $assignment->description = $request->description? $request->description : $assignment->description;
+        $assignment->assigned_at = $request->assigned_at? $request->assigned_at : $assignment->assigned_at;
+        $assignment->due_date = $request->due_date? $request->due_date : $assignment->due_date;
+
+        if($assignment->save()){
+            return response()->json([
+                "status" => "Success",
+                "data" => $assignment
+            ]);
+        }
+
+        return response()->json([
+            "status" => "Error",
+            "data" => "Error updating a model"
+        ]);
+    }
+
+    public function updateAssignment(Request $request, $id){
+
+        $assignment = Assignment::find($id);
+        $assignment->description = $request->description? $request->description : $assignment->description;
+        $assignment->assigned_at = $request->assigned_at? $request->assigned_at : $assignment->assigned_at;
+        $assignment->due_date = $request->due_date? $request->due_date : $assignment->due_date;
+
+        if($assignment->save()){
+            return response()->json([
+                "status" => "Success",
+                "data" => $assignment
+            ]);
+        }
+
+        return response()->json([
+            "status" => "Error",
+            "data" => "Error updating a model"
+        ]);
+    }
+
+    function deleteAssignment($id) {
+        //$user = Auth::user();
+        $delete = Assignment::where('_id', $id)->delete();
+        if ($delete) {
+            return response()->json([
+                'status' => 'success'
+            ]);
+        }
+        return response()->json([
+            'status' => 'failed'
+        ], 401);
+    }
+
+    public function getAssignments($course_id){
+        $assignments = Assignment::where('course_id', $course_id)->get(); ;
+        return response()->json([
+            "status" => "Success",
+            "data" => $assignments
+        ]);
+    }
+
+    public function getAssignment($id){
+        $assignment = Assignment::where('_id', $id)->get(); ;
+        return response()->json([
+            "status" => "Success",
+            "data" => $assignment
         ]);
     }
 
