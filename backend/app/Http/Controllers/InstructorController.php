@@ -80,4 +80,72 @@ class InstructorController extends Controller
         }
     }
 
+    // for the annoucememnt
+    public function addAnnoucement(Request $request){
+
+        $annoucememnt = new Annoucement;
+        
+        $annoucememnt->course_id = $request->course_id ? $request->course_id : $annoucememnt->course_id;
+        $annoucememnt->description = $request->description? $request->description : $annoucememnt->description;
+
+        if($annoucememnt->save()){
+            return response()->json([
+                "status" => "Success",
+                "data" => $course
+            ]);
+        }
+
+        return response()->json([
+            "status" => "Error",
+            "data" => "Error updating a model"
+        ]);
+    }
+
+    public function updateAnnoucement(Request $request, $id){
+
+        $annoucememnt = Annoucement::find($id);
+        $annoucememnt->description = $request->description? $request->description : $annoucememnt->description;
+            
+        if($annoucememnt->save()){
+            return response()->json([
+                "status" => "Success",
+                "data" => $course
+            ]);
+        }
+
+        return response()->json([
+            "status" => "Error",
+            "data" => "Error updating a model"
+        ]);
+    }
+
+    function deleteAnnoucement($id) {
+        //$user = Auth::user();
+        $delete = Annoucement::where('_id', $id)->delete();
+        if ($delete) {
+            return response()->json([
+                'status' => 'success'
+            ]);
+        }
+        return response()->json([
+            'status' => 'failed'
+        ], 401);
+    }
+
+    public function getAnnoucements($course_id){
+        $annoucememnts = Annoucement::where('course_id', $course_id)->get(); ;
+        return response()->json([
+            "status" => "Success",
+            "data" => $annoucememnts
+        ]);
+    }
+
+    public function getAnnoucement($id){
+        $annoucememnt = Annoucement::where('_id', $id)->get(); ;
+        return response()->json([
+            "status" => "Success",
+            "data" => $annoucememnt
+        ]);
+    }
+
 }
