@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class User extends Authenticatable implements JWTSubject{
+class User extends Eloquent implements JWTSubject{
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [

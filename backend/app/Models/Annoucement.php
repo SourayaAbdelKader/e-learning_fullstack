@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Annoucement extends Model{
+class Annoucement extends Eloquent{
     
     use HasFactory;
     public function courses() { //refering to the instructor and students

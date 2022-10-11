@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api');
     }
 
     public function login(Request $request){
@@ -44,15 +44,15 @@ class AuthController extends Controller
 
     public function register(Request $request){
         $request->validate([
-            'name' => 'required|string|max:255',
+            'full_name' => 'required|string',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'full_name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => bcrypt($request->password),
         ]);
 
         $token = Auth::login($user);
