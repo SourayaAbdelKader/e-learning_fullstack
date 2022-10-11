@@ -4,17 +4,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
+Route::prefix('v0')->group(function () {
 
-Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
-    Route::get('me', 'me');
+    Route::prefix('auth')->group(function () {  
+        Route::post("/login", [AuthController::class, "login"])->name('login');
+        Route::post("/register", [AuthController::class, "register"])->name('register');
+        Route::get("/not_auth", [AuthController::class, 'notAuth'])->name('not-auth');
+    });
 
-});
+    Route::group(["middleware" => "auth:api"], function(){
 
+        Route::prefix('admin')->group(function () {
+            Route::group(["middleware" => "role"], function(){
+                Route::get('/restricted', [AdminController::class, 'restricted'])->name('restricted');
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+            });
+        });
+
+        Route::prefix('instructor')->group(function () {
+
+        });
+        
+        Route::prefix('student')->group(function () {
+
+        });
+    });
+
 });

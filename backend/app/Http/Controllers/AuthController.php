@@ -10,13 +10,12 @@ use App\Models\User;
 class AuthController extends Controller
 {
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth:api', ['except' => ['login','register']]);
     }
 
-    public function login(Request $request)
-    {
+    public function login(Request $request){
+        
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
@@ -95,6 +94,10 @@ class AuthController extends Controller
                 'type' => 'bearer',
             ]
         ]);
+    }
+
+    public function notAuth() {
+        return "You are unauthorized.";
     }
 
 }
