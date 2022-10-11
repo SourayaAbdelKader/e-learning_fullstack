@@ -11,6 +11,7 @@ return new class extends Migration{
             $collection->id();
             $collection->string("name", 100)->unique();
             $collection->string("code", 30)->unique();
+            $collection->foreign('instructor_id')->references('id')->on('users');
             $collection->integer("credits", 2);
             $collection->integer("hours", 3);
             $collection->date("begin_at");
